@@ -1,6 +1,9 @@
 
 ; Task 3
 ; Done by Derrick Asiedu Aboagye - g22A3680
+; Amogelang Mphela - g22a7399
+; Wakanaka Gurure - g22g8069
+; Rebecca Hufkie - g22h2807
 
 	0	DSP		6	; space for 6 variables. var0=n, var1=low, var2=high, var3=item, var4=isPalindrome, var5=list
 	2	LDA		5	; push address of var5 (stores address of list)
