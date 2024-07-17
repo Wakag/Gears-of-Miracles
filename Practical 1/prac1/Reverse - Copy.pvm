@@ -1,0 +1,62 @@
+                          ; try adding high level comments
+                          ; and for a start include your names
+						  ; TASK2 (a) AND opcode is used 
+						  ; Rebecca Hufkie - g22h2807
+						  
+   0   DSP      3         ; list is variable 0, i is variable 1, n is variable 2
+   2   LDA      0
+   4   LDC      10		  ; push constant 10, const max = 10
+   6   ANEW               ; allocate storage for list of 10, int[] list = new int[max] 
+   7   STO				   
+   8   LDA      1		
+  10   LDC      0
+  12   STO				  ; i = 0
+  13   LDA      2
+  15   INPI				  ; Read(n)
+  16   LDA      2
+  18   LDV
+  19   LDC      0
+  21   CNE				  ; check if n != 0
+  22   LDA      1
+  24   LDV
+  25   LDC      10
+  27   CLT				  ; check if i < max
+  28   AND
+  29   BZE      56		  
+  31   LDA      0
+  33   LDV
+  34   LDA      1
+  36   LDV
+  37   LDXA				  
+  38   LDA      2
+  40   LDV
+  41   STO				  ; list[i] = n;
+  42   LDA      1
+  44   LDA      1
+  46   LDV
+  47   LDC      1
+  49   ADD				  ; i++
+  50   STO
+  51   LDA      2
+  53   INPI				  ; Read(n)
+  54   BRN      16
+  56   LDA      1
+  58   LDV
+  59   LDC      0
+  61   CGT				   ; check if i > 0 
+  62   BZE      84
+  64   LDA      1
+  66   LDA      1
+  68   LDV
+  69   LDC      1
+  71   SUB				   ; decrement i
+  72   STO				   ; i-- 
+  73   LDA      0
+  75   LDV
+  76   LDA      1
+  78   LDV
+  79   LDXA
+  80   LDV
+  81   PRNI				   ; prints out integer value, write(list[i])
+  82   BRN      56		   ; branch back to loop until all values are printed
+  84   HALT

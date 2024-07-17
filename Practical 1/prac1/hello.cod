@@ -1,0 +1,6 @@
+ASSEM
+BEGIN
+  {    0 } DSP      0
+  {    2 } PRNS     "Hello World!"
+  {    4 } HALT    
+END.

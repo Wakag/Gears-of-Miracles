@@ -1,0 +1,33 @@
+ASSEM
+BEGIN
+  {    0 } DSP      1
+  {    2 } LDA      0
+  {    4 } INPC    
+  {    5 } LDA      0
+  {    7 } LDA      0
+  {    9 } LDV     
+  {   10 } LDC      46
+  {   12 } CNE     
+  {   13 } BZE      44
+  {   15 } LDA      0
+  {   17 } LDV     
+  {   18 } LOW     
+  {   19 } STO     
+  {   20 } LDA      0
+  {   22 } LDV     
+  {   23 } ISLET   
+  {   24 } BZE      41
+  {   26 } LDC      97
+  {   28 } LDA      0
+  {   30 } LDV     
+  {   31 } SUB     
+  {   32 } LDC      13
+  {   34 } ADD     
+  {   35 } LDC      26
+  {   37 } REM     
+  {   38 } LDC      97
+  {   40 } ADD     
+  {   41 } PRNC    
+  {   42 } BRN      2
+  {   44 } HALT    
+END.

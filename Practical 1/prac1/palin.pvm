@@ -1,0 +1,25 @@
+					;
+					; PVM code for palin.pav
+	0	DSP		6   ; n is at v0, low is at v1, high is at v2, item is at v3,isPalindrome is at v4, list is at v5
+	2	LDA		5
+	4	LDC		10 
+	6	ANEW		; int [] list = new int [10];
+	7	STO
+	8   LDA		0
+	10	LDC		0
+	12	STO			; n = 0
+	13  LDA		3
+	15  INPI		; read(item)
+	16  LDA		3
+	18  LDV     
+	19  LDC     0
+	21  CNE     	; check item != 0
+	22  BZE		n	; until item = 0
+	24  ?
+		LDA		1
+		LDC 	0
+		STO			; low = 0
+		
+		
+		HALT
+	

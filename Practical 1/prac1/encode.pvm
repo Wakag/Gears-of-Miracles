@@ -1,0 +1,38 @@
+						; Task 5 
+						; Rebecca Hufkie - g22h2807
+						; Derrick Asiedu Aboagye - g22A3680
+						; Amogelang Mphela - g22a7399
+						; Wakanaka Gurure - g22g8069
+						
+	0 	DSP 	1		; ch is at v0
+	2 	LDA 	0
+	4 	INPC			; read(ch)
+	5 	LDA 	0
+	7 	LDA 	0
+	9 	LDV
+	10 	LDC 	46
+	12 	CNE				; check ch == '.'
+	13 	BZE 	44		
+	15 	LDA 	0
+	17 	LDV
+	18 	LOW             ; ch = lower(ch)
+	19 	STO
+	20 	LDA 	0
+	22 	LDV
+	23 	ISLET           ; isLetter(ch)
+	24 	BZE 	41
+	26 	LDC 	97
+	28 	LDA 	0
+	30 	LDV 
+	31 	SUB
+	32 	LDC 	13
+	34 	ADD              ; + 13
+	35 	LDC 	26  
+	37 	REM              ; % 26
+	38 	LDC 	97
+	40 	ADD 
+	41 	PRNC			 ; write(ch);
+	42 	BRN 	2		 ; Repeat
+	44 	HALT
+
+
