@@ -1,0 +1,93 @@
+
+; Task 3
+; Done by Derrick Asiedu Aboagye - g22A3680
+
+	0	DSP		6	; space for 6 variables. var0=n, var1=low, var2=high, var3=item, var4=isPalindrome, var5=list
+	2	LDA		5	; push address of var5 (stores address of list)
+	4	LDC		10	; push constant/immediate 10 as TOS as size of list
+	6	ANEW		; allocate heap storage space for list	; int[] list = new int[10]
+	7	STO			; store address of list[0] as value of TOS
+	8	LDA		0	; push address of n (var0) as TOS
+	10	LDC		0	; push constant/immediate 0 as TOS
+	12	STO			; n = 0
+	13	LDA		3	; push address of item (var3) as TOS
+	15	INPI		; read(item) ; store user input in var3 (item)
+	16	LDA		3	; REPEAT
+	18	LDV			; item = mem[cpu.fp - 1 - 3]
+	19	LDC		0	; push constant/immediate 0 as TOS
+	21	CNE			; item != 0
+	22	BZE		46	; UNTIL item = 0; break out of loop
+	24	LDA 	5	; push address of var5(list) as TOS
+	26	LDV			; dereference address of list[0] as TOS
+	27	LDA		0	; push address of n as TOS
+	29	LDV			; dereference value of n as TOS
+	30	LDXA		; calculate address of list[n]
+	31	LDA 	3		
+	33	LDV			
+	34	STO			; list[n] = item
+	35	LDA		0	; push address of n, USED in STO at 39
+	37	LDA 	0
+	39	LDV
+	40	LDC		1
+	42	ADD			; n = n + 1
+	43	STO			; n = mem[cpu.fp - 1 - 0] ; new n
+	44	BRN		13	; while(item != 0);
+	46	LDA		4	; push address of var4 (isPalindrome)
+	48	LDC		1	; push constant/immediate 1 (boolean value for true) as TOS
+	50	STO			; isPalindrome = true
+	51	LDA		1	; push address of low (var1)
+	53	LDC		0	
+	55	STO			; low = 0
+	56	LDA		2	; push address of high (var2) as TOS
+	58	LDA		0	; push address of n (var0) as TOS
+	60	LDV			; dereference n as TOS
+	61	LDC		1	; push constant/immediate 1 as TOS
+	63	SUB			; TOS = n - 1
+	64	STO			; mem[cpu.fp - 1 - 2] = n - 1; high = n - 1
+	65	LDA		1	; REPEAT ; push address of low (var1) as TOS
+	67	LDV			; dereference low as TOS
+	68	LDA		0	; push address of n as TOS
+	70	LDV			; dereference value of n as TOS
+	71	LDC 	1
+	73	SUB			; push n - 1 as TOS
+	74	CLT			; is (low < n - 1) ?
+	75	BZE		120	; if TOS >= SOS, break out of while loop
+	77	LDA		5	; push address of adrress of list[0] as TOS
+	79	LDV			; dereference var5 and push address of list[0] as TOS
+	80	LDA		1	; push address of low as TOS
+	82	LDV			; dereference value of low to push it as index/subscript on TOS
+	83	LDXA		; compute address of list[low] as TOS
+	84	LDV			; dereference list[low] value as TOS
+	85	LDA		5
+	87	LDV			; dereference address of list[0] as TOS
+	88	LDA		2	; push address of high (var2) as TOS
+	90	LDV			; dereference value of high to push it as index/subscript on TOS
+	91	LDXA		; compute address of list[high] as TOS
+	92	LDV			; dereference list[high] as TOS
+	93	CNE			; if (list[low] != list[high])
+	94	BZE		101	; jump to 102 if list[low] == list[high]
+	96	LDA		4	; push address of isPalindrome as TOS
+	98	LDC		0	; push constant/immediate 0 (boolean value for false) as TOS
+	100	STO			; isPalindrome = false
+	101	LDA		1	; push address of low as TOS
+	103	LDA		1
+	105	LDV			; dereference value of low as TOS
+	106	LDC		1
+	108	ADD			; pop TOS and SOS, push low (SOS) + 1 (TOS) as new TOS
+	109	STO			; low = low + 1
+	110	LDA		2	; push address of high as TOS
+	112	LDA		2
+	114	LDV			; dereference high as TOS
+	115	LDC		1
+	117	SUB			; push high - 1 as new TOS
+	118	BRN		66	; UNTIL low >= n - 1; while (low < n - 1)
+	120	LDA		4	; push address of isPalindrome (var4) as TOS
+	122	LDV			; dereference TOS to get boolean value of isPalindrome (1 if true, 0 if false)
+	123	LDC		1	; push true (1) as TOS
+	125	CEQ			; if (isPalindrome)
+	126	BZE		132	; isPalindrome = false
+	128	PRNS	"Palindromic sequence"
+	130	BRN		134	; isPalindrome = true
+	132	PRNS	"Non-palindromic sequence"
+	134	PRNL
+	135	HALT
