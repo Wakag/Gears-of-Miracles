@@ -1,0 +1,63 @@
+                        ; try adding high level comments
+                        ; Derrick Asiedu Aboagye
+						; Amogelang Mphela
+						; Wakanaka Gurure
+						; Rebecca Hufkie
+						  
+   0   DSP      3		; reserve space for 3 variables on stack. var0=list[], var1=i, var2=n
+   2   LDA      0		; push address of address of list (var0) as TOS
+   4   LDC      10		; max = 10; push constant/immediate 10, size  of list array, as TOS
+   6   ANEW				; int[] list = new list[max]
+   7   STO				; store address of list[0] in var0 at mem[cpu.fp - 1 - 0]
+   8   LDA      1		; push address of i (var1) as TOS
+  10   LDC      0
+  12   STO				; int i = 0
+  13   LDA      2		; push address of n (var2) as TOS
+  15   INPI				; Ask user for int n; store n at mem[cpu.fp - 1 -2] (var2)
+  16   LDA      2		
+  18   LDV				; push value of n as TOS
+  19   LDC      0		; push constant/immediate 0 as boolean false value on TOS
+  21   CNE				; (n != 0) ??
+  22   LDA      1		
+  24   LDV				; push value of i as TOS
+  25   LDC      10		; push max = 10 as TOS
+  27   CLT				; (i < max) ??
+  28   AND				; (n != 0) && (i < max) == true ??
+  29   BZE      56		; (n != 0) && (i < max) == false
+  31   LDA      0		; push address of address of list (var0) as TOS
+  33   LDV				; push address of list[0] (var0) as TOS
+  34   LDA      1
+  36   LDV				; push value of i (var1) as index/subscript on TOS
+  37   LDXA				; compute address of list[i]
+  38   LDA      2
+  40   LDV				; push value of n as TOS
+  41   STO				; list[i] = n;
+  42   LDA      1		; push address of i (var1) as TOS
+  44   LDA      1
+  46   LDV				; push CURRENT value of 1 (var1) as TOS
+  47   LDC      1
+  49   ADD				; push i + 1 as TOS
+  50   STO				; i++ ; new value of i
+  51   LDA      2		; push address of n (var2) as TOS
+  53   INPI				; Ask user for int n; store n at mem[cpu.fp - 1 -2] (var2)
+  54   BRN      16		; while ((n != 0) && (i < max))
+  56   LDA      1
+  58   LDV				; push value of i (var1) as TOS
+  59   LDC      0
+  61   CGT				; (i > 0) ??
+  62   BZE      84		; i <= 0 ?? Break out of while loop
+  64   LDA      1
+  66   LDA      1
+  68   LDV				; push value of i (var1) as TOS
+  69   LDC      1
+  71   SUB				; push value of i - 1 as TOS
+  72   STO				; i--; new value of i
+  73   LDA      0		; push address of address of list (var0) as TOS
+  75   LDV				; push address of list[0] (var0) as TOS
+  76   LDA      1
+  78   LDV				; push value of i (var1) as TOS
+  79   LDXA				; compute address of list[i]
+  80   LDV				; dereference ACTUAL int value found at list[i]
+  81   PRNI				; print int value at list[i]
+  82   BRN      56		; while (i > 0)
+  84   HALT				; END
