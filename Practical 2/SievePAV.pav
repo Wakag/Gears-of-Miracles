@@ -1,6 +1,12 @@
 // Sieve of Eratosthenes for finding primes 2 <= n <= Max (Parva version)
 // P.D. Terry,  Rhodes University, 2017
 
+// Rebecca Hukfie - g22h2807
+// Derrick Asiedu Aboagye - g22A3680
+// Amogelang Mphela - g22a7399
+// Wakanaka Gurure - g22g8069
+
+
 
   void main() {
     const Max = 32000;
