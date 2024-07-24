@@ -1,6 +1,9 @@
 
 // Group Name: Gears of Miracles 
-//
+//Rebecca Hufkie - g22h2807
+//Wakanaka Gurure - g22g8069
+//Amogelang Mphela - g22a7399
+//Derrick Asiedu Aboagye - g22A3680
 
 import library.*;
 
