@@ -5,6 +5,13 @@
 // Version for Practical 1
 // Solution -- several changes to add new opcodes
 
+/*
+Rebecca Hufkie
+Derrick Asiedu Aboagye
+Amogelang Mphela
+Wakanaka Gurure
+*/
+
 package Assem;
 
 import java.util.*;
