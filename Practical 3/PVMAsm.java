@@ -3,6 +3,14 @@
 // Modified by KL Bradshaw for Prac 2, 2021
 // Solution no changes
 
+/*
+Rebecca Hufkie
+Derrick Asiedu Aboagye
+Amogelang Mphela
+Wakanaka Gurure
+*/
+
+
 package Assem;
 
 import java.io.*;
