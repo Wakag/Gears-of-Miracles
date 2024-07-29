@@ -22,6 +22,6 @@ IGNORE CHR(0) .. CHR(31)
 PRODUCTIONS
   Calc       = { Expression "=" } EOF .
   Expression = Term { "+" Term  |  "-" Term } .
-  Term       = Factor { "*" Factor |  "/" Factor | "%" Factor | "^" Factor } .
+  Term       = Factor { "*" Factor |  "/" Factor | "%" Factor } ["^" Factor ] .
   Factor     = decNumber | "(" Expression ")" | hexNumber | "sqrt(" Expression ")" .
 END Calc.
