@@ -1,0 +1,31 @@
+COMPILER Olympics $CN
+/*
+Derrick Asiedu Aboagye
+Amogelang Mphela
+Wakanaka Gurure
+Rebecca Hufkie
+*/
+
+CHARACTERS
+    upper               = "A" .. "Z" .
+    lower               = "a" .. "z" .
+    digits              = "0123456789" .
+
+TOKENS
+    lowerCase           = lower { lower } .
+    capitalised         = upper { upper } { lower } .
+    number              = digits { digits } .
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+    Olympics            = { Start "." } EOF .
+    Start               = discipline category [ subEvent ] winner [ date ] .
+    discipline          = "[" ( "Athletics" | "Football" | "Swimming" | "Cycling" | "Shooting" ) "]" .
+    category            = "Men" | "Women" | "Mixed" .
+    subEvent            = "\"" [ number lowerCase ] capitalised [ capitalised ] [ lowerCase ] [ number lowerCase ] "\"" .
+    winner              = aWinner { "," aWinner } .
+    aWinner             = "(" capitalised [ [ "-" ]  capitalised [ capitalised ] "," capitalised ] [ "," capitalised ] ")" .
+    date                = ( "OR/" | "WR/" ) number .
+
+END Olympics .

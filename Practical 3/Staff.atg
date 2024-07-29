@@ -1,0 +1,27 @@
+COMPILER Staff $CN
+/*
+Derrick Asiedu Aboagye
+Amogelang Mphela
+Wakanaka Gurure
+Rebecca Hufkie
+*/
+
+CHARACTERS
+	upperCase 	  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" .
+	lowerCase  	  = "abcdefghijklmnopqrstuvwxyz" .
+
+TOKENS
+	Name	  	  = upperCase { lowerCase } .
+	initial	  	  = upperCase "." .
+	
+IGNORE CHR(0) .. CHR(31)
+	
+PRODUCTIONS
+	Staff 		  = { Fullname "." } EOF .
+	Fullname	  = [ title ] ( initial { initial } | firstName { initial } ) surName { qualification } .
+	title		  = "Dr" | "Professor" | "Prof" | "Mr" | "Ms" | "Mrs" .
+	firstName	  = Name .
+	surName		  = Name .
+	qualification = "," ( "PhD" | "BJrn" | "MSc" | "BSc" | "BSc(Hons)" ) .
+
+END Staff .

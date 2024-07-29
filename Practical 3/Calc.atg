@@ -1,0 +1,27 @@
+COMPILER Calc  $CN
+/* Simple arithmetic calculator
+   P.D. Terry, Rhodes University extended by KB 2021 */
+  
+/*
+Derrick Asiedu Aboagye
+Amogelang Mphela
+Wakanaka Gurure
+Rebecca Hufkie
+*/
+
+CHARACTERS
+  digit      = "0123456789" .
+  hexDigit	 = digit + "ABCDEF" .
+
+TOKENS
+  decNumber  = digit { digit } .
+  hexNumber	 = "0" hexDigit { hexDigit } "H" .
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Calc       = { Expression "=" } EOF .
+  Expression = Term { "+" Term  |  "-" Term } .
+  Term       = Factor { "*" Factor |  "/" Factor | "%" Factor | "^" Factor } .
+  Factor     = decNumber | "(" Expression ")" | hexNumber | "sqrt(" Expression ")" .
+END Calc.
