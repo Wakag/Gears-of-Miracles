@@ -22,6 +22,6 @@ PRODUCTIONS
 	title		  = "Dr" | "Professor" | "Prof" | "Mr" | "Ms" | "Mrs" .
 	firstName	  = Name .
 	surName		  = Name .
-	qualification = "," ( "PhD" | "BJrn" | "MSc" | "BSc" | "BSc(Hons)" ) .
+	qualification = "," ( "PhD" | "BJrn" | "MSc" | "BSc"["(Hons)"] ) .
 
 END Staff .
