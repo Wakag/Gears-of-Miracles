@@ -8,7 +8,7 @@ COMPILER Bool $CN
 /* Rebecca Hufkie - g22h2807
    Amogelang Mphela - g22a7399
    Wakanaka Gurure - g22g8069
-   Derrick Asiedu Aboagye - g22a */   
+   Derrick Asiedu Aboagye - g22a3680 */   
 
   static boolean[] mem = new boolean[26];
   static boolean[] initialized = new boolean[26]; //track the initialized values
