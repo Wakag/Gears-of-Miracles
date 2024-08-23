@@ -1,0 +1,79 @@
+import library.*;
+import java.util.*;
+
+COMPILER Bool $CN
+/* Boolean expression calculator
+   P.D. Terry, modified by KL Bradshaw 2024 */
+
+/* Rebecca Hufkie - g22h2807
+   Amogelang Mphela - g22a7399
+   Wakanaka Gurure - g22g8069
+   Derrick Asiedu Aboagye - g22a */   
+
+  static boolean[] mem = new boolean[26];
+  static boolean[] initialized = new boolean[26]; //track the initialized values
+
+IGNORECASE
+
+CHARACTERS
+  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" .
+TOKENS
+  variable   = letter .
+
+COMMENTS FROM "(*" TO "*)"  NESTED
+COMMENTS FROM "/*" TO "*/"  NESTED
+
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+  Bool                               	(. 	int index = 0;
+											boolean value = false;
+											char var;
+											for (int i = 0; i < 26; i++) {
+                        mem[i] = false; 
+                        initialized[i] = false; //all variables set to false
+                        }.)
+  = { ( Variable<out var>              	(. index = var - 'A'; .)
+         WEAK "=" Expression<out value>				(. mem[index] = value;
+                                                 initialized[index] = true; /*index marked as initialized*/ .)
+		  | "print" Expression<out value>			(. IO.writeLine(value); .)
+	   )
+       SYNC ";"
+    } EOF .
+
+  Variable<out char var>
+  = variable                         (. var = token.val.charAt(0); .)
+  .
+
+  Expression<out boolean var>             
+  = Term<out var>
+    { Or Term<out boolean termVar>        (. var = var || termVar; .)
+    } .
+
+  Term<out boolean var>                     (. var = false; .)
+  = Factor<out var>
+    { [ And ] Factor<out boolean factVar>   (. var = var && factVar; .)
+    } .
+
+  Factor<out boolean var>      (. var = false; .)
+ /* Note that ' means not as a postfix operator, e.g. b'  means "not b" */
+   =   "NOT" Factor<out var>  (. var = !var; .)
+    | Primary<out var>
+      { "'"                   (. var = !var; .)
+      } .
+
+  Primary<out boolean Primvar>       (. Primvar = false; .)
+  =   True                    (. Primvar = true; .)
+    | False                   (. Primvar = false; .)
+    | variable                (. int index = token.val.charAt(0) - 'A' ; 
+                                 if(!initialized[index]) {          /*check if variable has been defined*/
+                                    SemError("Variable " + token.val + " is undefined."); /* output error if undefined */
+                                 } else { Primvar = mem[index]; }
+                                 .)
+    | "(" Expression<out Primvar> ")" .
+
+  True  = "TRUE" | "1" .
+  False = "FALSE" | "0" .
+  And   = "AND" | "&&" | "." .
+  Or    = "OR" | "||" | "+" .
+END Bool.
