@@ -1,0 +1,121 @@
+import library.*;
+import java.util.*;
+
+COMPILER Olympics $CN
+/* Parse a list of winners along with sport discipline and 
+   whether olympic (OR) or world (WR) record at the Olympics
+   KL Bradshaw, Rhodes University, 2024 */
+
+  static class Entry {
+       public String name;
+       public int medalCount;                                     
+
+       public Entry(String name) {               
+         this.name = name;
+         this.medalCount = 1;
+       }
+
+       public void incMedal() {
+         this.medalCount++;
+      }
+  }
+
+  static ArrayList<Entry> list = new ArrayList<Entry>(); 
+
+  public static Entry getEntry(String name){
+
+      System.out.println("reached entry get");
+      Entry placeHolder = new Entry("placeHolder");
+
+      for(int i = 0; i < list.size(); i++){
+
+        if(list.get(i).name.equals(name)){
+          System.out.println(list.get(i).name);
+          return list.get(i);
+        }
+
+        else{
+          continue;
+        }
+
+      }
+
+      return placeHolder;
+  }
+
+  public static boolean entryExists(String name){
+
+      System.out.println("reached entry exists");
+      boolean bool = false;
+
+      for(int i = 0; i < list.size(); i++){
+
+        if((list.get(i).name).equals(name)){
+           bool = true;
+        }
+
+        else{
+          continue;
+        }
+
+      }
+
+      return bool;
+  }
+
+  public static void printEntries(ArrayList<Entry> list){
+    for(int i = 0; i < list.size(); i++){
+
+      System.out.print(list.get(i).name);
+      System.out.print("----");
+      System.out.print(list.get(i).medalCount);
+      System.out.print("  ");
+      
+    }
+  }
+
+
+CHARACTERS
+  digit    	= "0123456789" .
+  lcase 	= 'a' .. 'z' .
+  ucase 	= 'A' .. 'Z' .
+  letters 	= lcase + ucase.
+  control  	= CHR(0) .. CHR(31) .
+  inEvent  	= ANY - control - '"' .
+  nameletters = lcase + "-'". 
+  
+TOKENS
+  event  = '"' inEvent { inEvent } '"' .
+  name =  ucase nameletters { nameletters } . 
+  country =  ucase { ucase } .
+  year   = digit digit digit digit .
+  sport = '[' letters { letters } ']' .
+
+IGNORE control
+
+PRODUCTIONS
+  Olympics 						  		 
+   = { 
+       OneEvent } 				  		
+	  EOF.
+  Winners = 							
+    "(" [ name {name} ","] 
+	  country 						(. if(entryExists(token.val)){Entry thecountry = getEntry(token.val); thecountry.incMedal(); printEntries(list);}
+                              else{Entry thecountry = new Entry(token.val); list.add(thecountry);printEntries(list);}.)	
+	  {country				       	 		
+	  } 								
+	 ")"
+	  {"," 
+	    Winners} . 
+  Records =  
+      ("OR" | "WR" ) "/" year  . 
+ OneEvent   =  
+    sport 
+   ("Men" | "Women" | "Mixed") 
+   [ event ] 
+   Winners  
+   [ Records ] 
+   SYNC "." 
+   .  
+
+END Olympics.
