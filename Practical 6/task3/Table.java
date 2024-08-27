@@ -46,13 +46,13 @@ import library.*;
     // Prints out all countries with their medal totals
 
       //format headings
-      IO.write("Country", -16); 
+      IO.write("Country", -16); //left justify
       IO.writeLine("Total Medals");
 
       for (int i = 0; i < list.size(); i++){ //loop through list to get names of countries and total values
         Entry ent = list.get(i);
         //format output of country names and totals
-        IO.write(ent.name, -16); 
+        IO.write(ent.name, -16);  //left justify
         IO.writeLine(ent.total);
       }
       
