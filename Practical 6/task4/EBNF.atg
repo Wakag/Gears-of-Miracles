@@ -4,6 +4,11 @@ COMPILER EBNF $CN
 /* Parse a set of EBNF productions
    P.D. Terry, modified by KL Bradshaw, 2024 */
 
+/* Rebecca HUfkie - g22h2807
+   Amogelang Mphela - g22a7399
+   Wakanaka Gurure - g22g8069
+   Derrick Asiedu Aboagye - g22a */ 
+
   public static OutFile output;
   static int count = 0;
   static boolean declared = false;
